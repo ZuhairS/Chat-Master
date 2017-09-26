@@ -1,6 +1,10 @@
 const express = require('express');
-const path = require('path');
 const app = express();
+const http = require('http').Server(app);
+const path = require('path');
+const chatServer = require('./lib/chatServer');
+
+chatServer.listen(http);
 
 app.use(express.static('public'));
 
@@ -10,7 +14,6 @@ app.get('/', (req, res) => {
 
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, () => {
-
+http.listen(PORT, () => {
   console.log('Listening on', PORT);
 });
